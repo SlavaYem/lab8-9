@@ -1,0 +1,70 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Автор</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Автор: </ion-label>
+        <ion-input
+          id="author-name"
+          type="text"
+          formControlName="authorName"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Дата народження: </ion-label>
+        <ion-input
+          id="author-DateBirth"
+          type="text"
+          formControlName="authorDateBirth"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Дата смерті: </ion-label>
+        <ion-input
+          id="author-DateDeath"
+          type="text"
+          formControlName="authorDateDeath"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Біографія: </ion-label>
+        <ion-input
+          id="author-bio"
+          type="text"
+          formControlName="authorBio"
+        ></ion-input>
+      </ion-item>
+      <ion-card formArrayName="books">
+        <ion-card-header>Книги</ion-card-header>
+        <ion-card-content>
+          <ion-button color="tertiary" (click)="addBooks()">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Додати книгу
+          </ion-button>
+          <ion-item *ngFor="let book of getControls(); let i = index">
+            <ion-input
+              type="text"
+              formControlName="{{ i }}"
+              placeholder="Назва книги"
+            ></ion-input>
+            <ion-button color="tertiary" (click)="deleteBook(i)">
+              <ion-icon slot="start" name="trash"></ion-icon>
+              Видалити
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <ion-button
+    type="submit"
+    fill="outline"
+    color="my-color"
+    expand="block"
+    [disabled]="!formGroup.valid"
+  >
+    Submit
+  </ion-button>
+</form>
